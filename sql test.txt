@@ -1,10 +1,12 @@
 #question 1 
+#Write an SQL query to print all Worker details from the Worker table order by FIRST_NAME Ascending.
 
 SELECT * 
 FROM Worker 
 ORDER BY FIRST_NAME ASC;
 
 #question 2 
+#Write an SQL query to print all Worker details from the Worker table order by FIRST_NAME Ascending and DEPARTMENT Descending.
 
 SELECT * 
 FROM Worker 
@@ -12,6 +14,7 @@ ORDER BY FIRST_NAME ASC, DEPARTMENT DESC;
 
 
 #question 3 
+#Write an SQL query to print details of workers excluding first names, “Vipul” and “Satish” from Worker table.
 
 SELECT * 
 FROM Worker 
@@ -19,6 +22,7 @@ WHERE FIRST_NAME NOT IN ('Vipul', 'Satish');
 
 
 #question 4 
+#Write an SQL query to print details of the Workers whose FIRST_NAME ends with ‘h’ and contains six alphabets.
 
 SELECT * 
 FROM Worker 
@@ -27,6 +31,7 @@ AND LENGTH(FIRST_NAME) = 6;
 
 
 #question 5 
+# Write an SQL query to fetch the count of employees working in the department ‘Admin’.
 
 SELECT COUNT(*) AS EmployeeCount
 FROM Worker
@@ -34,7 +39,48 @@ WHERE DEPARTMENT = 'Admin';
 
 
 #question 6 
+#Write an SQL query to fetch worker names with salaries >= 50000 and <= 100000.
 
 SELECT FIRST_NAME, LAST_NAME 
 FROM Worker 
 WHERE SALARY >= 50000 AND SALARY <= 100000;
+
+#question 7 
+#Write an SQL query to fetch the no. of workers for each department in the descending order.
+
+SELECT department, COUNT(*) AS worker_count
+FROM workers
+GROUP BY department
+ORDER BY worker_count DESC;
+
+#question 8 
+#Write an SQL query to determine the 5th highest salary without using TOP or limit method.
+
+SELECT salary 
+FROM (
+    SELECT salary, DENSE_RANK() OVER (ORDER BY salary DESC) AS rnk
+    FROM employees
+) ranked_salaries
+WHERE rnk = 5;
+
+SELECT DISTINCT e1.salary 
+FROM employees e1 
+WHERE 4 = (SELECT COUNT(DISTINCT e2.salary) FROM employees e2 WHERE e2.salary > e1.salary);
+
+
+#question 9
+#Write an SQL query to fetch the list of employees with the same salary.
+
+SELECT salary
+FROM employees
+GROUP BY salary
+HAVING COUNT(*) > 1;
+
+SELECT e1.*
+FROM employees e1
+JOIN (
+    SELECT salary
+    FROM employees
+    GROUP BY salary
+    HAVING COUNT(*) > 1
+) e2 ON e1.salary = e2.salary;
