@@ -1,0 +1,40 @@
+#question 1 
+
+SELECT * 
+FROM Worker 
+ORDER BY FIRST_NAME ASC;
+
+#question 2 
+
+SELECT * 
+FROM Worker 
+ORDER BY FIRST_NAME ASC, DEPARTMENT DESC;
+
+
+#question 3 
+
+SELECT * 
+FROM Worker 
+WHERE FIRST_NAME NOT IN ('Vipul', 'Satish');
+
+
+#question 4 
+
+SELECT * 
+FROM Worker 
+WHERE FIRST_NAME LIKE '_____h' 
+AND LENGTH(FIRST_NAME) = 6;
+
+
+#question 5 
+
+SELECT COUNT(*) AS EmployeeCount
+FROM Worker
+WHERE DEPARTMENT = 'Admin';
+
+
+#question 6 
+
+SELECT FIRST_NAME, LAST_NAME 
+FROM Worker 
+WHERE SALARY >= 50000 AND SALARY <= 100000;
