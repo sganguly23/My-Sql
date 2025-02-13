@@ -84,3 +84,13 @@ JOIN (
     GROUP BY salary
     HAVING COUNT(*) > 1
 ) e2 ON e1.salary = e2.salary;
+
+
+#question 10 
+# Write an SQL query to fetch the departments that have less than three people in it.
+
+SELECT department
+FROM employees
+GROUP BY department
+HAVING COUNT(*) < 3;
+
